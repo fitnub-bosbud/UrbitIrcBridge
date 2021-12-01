@@ -328,6 +328,7 @@ class BridgeIrcBot(SingleServerIRCBot):
         if len(urbit_channels) > 0:
             for urbit_channel in urbit_channels:
                 self.urbit_client.send_message(
+                    urbit_channel["resource_ship"],
                     urbit_channel["urbit_channel"],
                     "%s: %s" % (e.source.split("!")[0], e.arguments[0])
                 )

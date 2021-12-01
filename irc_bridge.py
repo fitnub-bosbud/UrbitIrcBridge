@@ -21,15 +21,15 @@ class urbit_client:
     def connect(self):
         self.client = quinnat.Quinnat(
         self.instance["urbit_url"],
-        self.instance["urbit_ship"],
+        self.instance["client_ship"],
         self.instance["urbit_code"]
     )
         self.client.connect()
     
-    def send_message(self, channel, message):
+    def send_message(self, resource_ship, channel, message):
         try:
             self.client.post_message(
-                self.instance["urbit_ship"],
+                resource_ship,
                 channel,
                 {"text": message}
             )
@@ -41,6 +41,7 @@ class urbit_client:
          self.client = self.connect()
 
 class urbit_bot():
+
     def __init__(self, instance, urb_info, sender):
         self.instance = instance
         self.urbit_client = urbit_client(urb_info)
@@ -49,16 +50,12 @@ class urbit_bot():
 
     def start(self):
         async def urbit_message_handler(message, _):
-            if self.urb_info["urbit_ship"] == message.host_ship:
-                matched_channels = list(filter(
-                        lambda chan: chan["urbit_channel"] == message.resource_name,
-                        self.instance["channels"]
-                        ))
-
-                if len(matched_channels) > 0:
-                    message_data = message.author + ": " + message.full_text
-                    for irc_channel in matched_channels:
-                        self.sender.send((irc_channel["irc_channel"], message_data))
+            matched_ships = list(filter(lambda ship: ship["resource_ship"] == message.host_ship, self.instance["channels"]))
+            if len(matched_ships) > 0:
+                for matched_ship in matched_ships:
+                    if matched_ship["urbit_channel"] == message.resource_name:
+                        message_data = message.author + ": " + message.full_text
+                        self.sender.send((matched_ship["irc_channel"], message_data))
 
         def urbit_listener(message, _):
             asyncio.run(urbit_message_handler(message, _))
@@ -101,7 +98,7 @@ if __name__ == "__main__":
     for instance in getjson_dump("config.json"):
         urb_info = {
                         "urbit_url": instance["urbit_url"],   
-                        "urbit_ship": instance["urbit_ship"],
+                        "client_ship": instance["client_ship"],
                         "urbit_code": instance["urbit_code"]
                     }
         for bot in instance["bots"]:
