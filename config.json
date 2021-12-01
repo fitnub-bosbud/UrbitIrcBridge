@@ -1,0 +1,15 @@
+[{"urbit_ship": "zod",
+  "urbit_url": "http://127.0.0.1",
+  "urbit_code": "",
+  "bots": [
+	  { "type": "irc",
+	    "irc_hostname": "irc.local",
+	    "irc_port": 6667,
+	    "irc_nickname": "urbot",
+	    "irc_password": "",
+  	    "channels": [
+	      { "irc_channel": "#examplechan1",
+        	"urbit_channel": "example-channel"},
+	      { "irc_channel": "#examplechan2",
+	        "urbit_channel": "example-channel2" }]}]
+}]
