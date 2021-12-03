@@ -1,15 +1,21 @@
-[{"urbit_ship": "zod",
-  "urbit_url": "http://127.0.0.1",
+[{"client_ship": "zod",
+  "urbit_url": "http://127.0.0.1:8080",
   "urbit_code": "",
   "bots": [
-	  { "type": "irc",
-	    "irc_hostname": "irc.local",
-	    "irc_port": 6667,
-	    "irc_nickname": "urbot",
-	    "irc_password": "",
-  	    "channels": [
-	      { "irc_channel": "#examplechan1",
-        	"urbit_channel": "example-channel"},
-	      { "irc_channel": "#examplechan2",
-	        "urbit_channel": "example-channel2" }]}]
+            { "type": "irc",
+              "irc_hostname": "irc.local",
+              "irc_port": 6667,
+              "irc_nickname": "urbot",
+              "irc_password": "",
+              "channels": [  
+                  { "resource_ship": "sampel-target",
+                    "irc_channel": "#test1",
+                    "urbit_channel": "test-chat-2203"},
+                  { "resource_ship": "sampel-target2",
+                    "irc_channel": "#test2",
+                    "urbit_channel": "ndchan-6017" }
+                          
+                  ]
+              }
+          ]     
 }]
