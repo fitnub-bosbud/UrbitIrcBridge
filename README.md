@@ -10,3 +10,5 @@
 Looking at your url bar you can find the ship resource / channel name (respectively):
 <img width="523" alt="image" src="https://user-images.githubusercontent.com/82548166/144684265-1fb45198-fba0-4130-870d-3dc340831a90.png">
 
+This project was influenced by https://github.com/midsum-salrux/faux. I mirrored pretty close to their .json layout because it was a good way to pair channels.
+
